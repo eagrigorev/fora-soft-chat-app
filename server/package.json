@@ -1,7 +1,7 @@
 {
-  "name": "fs-et-app",
+  "name": "server",
   "version": "1.0.0",
-  "description": "Fora Soft Evaluation Test App",
+  "description": "Fora Soft Evaluation Test App Backend",
   "main": "server.js",
   "scripts": {
     "start": "node server",
