@@ -4,8 +4,8 @@
   "description": "Fora Soft Evaluation Test App Backend",
   "main": "server.js",
   "scripts": {
-    "start": "node server",
-    "start:dev": "nodemon server"
+    "start:backend": "node server",
+    "start:backend:dev": "nodemon server"
   },
   "author": "",
   "license": "ISC",
