@@ -1,3 +1,5 @@
+const moment = require('moment');
+
 class Message {
   author;
   body;
