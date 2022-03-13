@@ -8,7 +8,7 @@ function JoinBlock({ onLogin }) {
 
 	const onEnter = async () => {
 		if (!roomId || !userName) {
-			return alert('Неверные данные');
+			return alert('Fill in both fields!');
 		}
 		const obj = {
 			roomId,
@@ -20,27 +20,31 @@ function JoinBlock({ onLogin }) {
 	};
 
 	return (
-		<div className="join-block">
-			<input
-				type="text"
-				placeholder="Room ID"
-				value={roomId}
-				onChange={(e) => setRoomId(e.target.value)}
-			/>
-			<input
-				type="text"
-				placeholder="Ваше имя"
-				value={userName}
-				onChange={(e) => setUserName(e.target.value)}
-			/>
+		<section className="app__login">
+			<div className="app__login__input">
+				<input
+					type="text"
+					placeholder="Room Name"
+					value={roomId}
+					onChange={(e) => setRoomId(e.target.value)}
+				/>
+			</div>
+			<div className="app__login__input">
+				<input
+					type="text"
+					placeholder="John Doe"
+					value={userName}
+					onChange={(e) => setUserName(e.target.value)}
+				/>
+			</div>
 			<button
 				disabled={isLoading}
 				onClick={onEnter}
-				className="btn btn-success"
+				className="app__login__button"
 			>
-				{isLoading ? 'ВХОД...' : 'ВОЙТИ'}
+				{isLoading ? 'Loading...' : 'Join the Conversation'}
 			</button>
-		</div>
+		</section>
 	);
 }
 
