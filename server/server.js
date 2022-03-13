@@ -1,59 +1,77 @@
-const PORT = require('./utils/const');
-const { userJoin, userLeft, userFind } = require('./utils/user');
-//const { createMessage } = require('./utils/message');
-
 const express = require('express');
 const cors = require('cors');
-const socket = require('socket.io');
 
 const app = express();
-app.use(express());
-app.use(cors());
-
-var server = app.listen(PORT, () => {
-  console.log(`Listening to port ${PORT}...`);
+const server = require('http').createServer(app);
+const io = require('socket.io')(server, {
+	cors: {
+		origin: '*',
+		methods: ['GET', 'POST'],
+	},
 });
 
-const io = socket(server);
+app.use(express.json());
+app.use(cors());
 
-// Socket connection initialisation
+const rooms = new Map();
+
+app.get('/rooms/:id', (req, res) => {
+	const { id: roomId } = req.params;
+	const obj = rooms.has(roomId)
+		? {
+				users: [...rooms.get(roomId).get('users').values()],
+				messages: [...rooms.get(roomId).get('messages').values()],
+		  }
+		: { users: [], messages: [] };
+	res.json(obj);
+});
+
+app.post('/rooms', (req, res) => {
+	const { roomId, userName } = req.body;
+	if (!rooms.has(roomId)) {
+		rooms.set(
+			roomId,
+			new Map([
+				['users', new Map()],
+				['messages', []],
+			])
+		);
+	}
+	res.send();
+});
+
 io.on('connection', (socket) => {
-  // New user joining the room
-  socket.on("userJoin", ({ name, room }) => {
-    const user = userJoin(socket.id, name, room);
-    socket.join(user.room);
-    console.log('join');
+	socket.on('ROOM:JOIN', ({ roomId, userName }) => {
+		socket.join(roomId);
+		rooms.get(roomId).get('users').set(socket.id, userName);
+		const users = [...rooms.get(roomId).get('users').values()];
+		socket.broadcast.to(roomId).emit('ROOM:SET_USERS', users);
+	});
 
-    // Welcome message to a newcomer
-    socket.emit(
-      'message',
-      createMessage('Bot', `Welcome, ${user.name}!`)
-    );
+	socket.on('ROOM:NEW_MESSAGE', ({ roomId, userName, text }) => {
+		const obj = {
+			userName,
+			text,
+		};
+		rooms.get(roomId).get('messages').push(obj);
+		socket.broadcast.to(roomId).emit('ROOM:NEW_MESSAGE', obj);
+	});
 
-    // Notify message to everyone in that room
-    socket.broadcast.to(user.room).emit(
-      'message',
-      createMessage('Bot', `${user.name} has joined the chat.`)
-    );
-  });
+	socket.on('disconnect', () => {
+		rooms.forEach((value, roomId) => {
+			if (value.get('users').delete(socket.id)) {
+				const users = [...value.get('users').values()];
+				socket.broadcast.to(roomId).emit('ROOM:SET_USERS', users);
+			}
+		});
+	});
 
-  // Someone is sending a message
-  socket.on('messaging', (message) => {
-    const user = userFind(socket.id);
-    io.to(user.room).emit(
-      'message',
-      createMessage(user.name, message)
-    );
-  });
+	console.log('user connected', socket.id);
+});
 
-  // Someone is leaving the room or closing the app
-  socket.on('disconnect', () => {
-    const user = userLeft(socket.id);
-    if (user) {
-      io.to(user.room).emit(
-        'message',
-        createMessage('Bot', `${user.name} has left the chat.`)
-      );
-    };
-  });
+server.listen(8000, (err) => {
+	if (err) {
+		throw Error(err);
+	}
+	console.log('Сервер запущен!');
 });
