@@ -20,45 +20,50 @@ function Chat({ users, messages, userName, roomId, onAddMessage }) {
 	}, [messages]);
 
 	return (
-		<div className="chat">
-			<div className="chat-users">
-				Комната: <b>{roomId}</b>
-				<hr />
-				<b>Онлайн ({users.length}):</b>
+		<section className="app__chat">
+			<div className="app__chat__info">
+				<p>
+					Room Name: <b>{roomId}</b>
+				</p>
+				<p>
+					<b>Online: {users.length}</b>
+				</p>
 				<ul>
 					{users.map((name, index) => (
 						<li key={name + index}>{name}</li>
 					))}
 				</ul>
 			</div>
-			<div className="chat-messages">
-				<div ref={messagesRef} className="messages">
+			<div className="app__chat__wrapper">
+				<div ref={messagesRef} className="app__chat__messages">
 					{messages.map((message) => (
-						<div className="message">
+						<article className="app__chat__message">
 							<p>{message.text}</p>
-							<div>
-								<span>{message.userName}</span>
-							</div>
-						</div>
+							<span>{message.userName}</span>
+						</article>
 					))}
 				</div>
-				<form>
-					<textarea
-						value={messageValue}
-						onChange={(e) => setMessageValue(e.target.value)}
-						className="form-control"
-						rows="3"
-					></textarea>
-					<button
-						onClick={onSendMessage}
-						type="button"
-						className="btn btn-primary"
-					>
-						Отправить
-					</button>
-				</form>
+				<div className="app__chat__controls">
+					<form>
+						<div className="app__chat__input">
+							<textarea
+								value={messageValue}
+								onChange={(e) => setMessageValue(e.target.value)}
+								className="app__chat__input"
+								rows="3"
+							></textarea>
+						</div>
+						<button
+							onClick={onSendMessage}
+							type="button"
+							className="app__chat__button"
+						>
+							Send
+						</button>
+					</form>
+				</div>
 			</div>
-		</div>
+		</section>
 	);
 }
 

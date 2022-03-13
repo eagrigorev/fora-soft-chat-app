@@ -1,8 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-
 import socket from './socket';
-
 import reducer from './reducer';
 import JoinBlock from './components/JoinBlock';
 import Chat from './components/Chat';
@@ -51,7 +49,10 @@ function App() {
 	window.socket = socket;
 
 	return (
-		<div className="wrapper">
+		<div className="app">
+			<header className="app__header">
+				<h1>Fora Soft Evaluation Test App</h1>
+			</header>
 			{!state.joined ? (
 				<JoinBlock onLogin={onLogin} />
 			) : (
