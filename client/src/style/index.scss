@@ -1,0 +1,165 @@
+@import './reset';
+@import './variables';
+
+* {
+	font-family: $font-primary;
+}
+
+.app {
+	&__login {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		background-color: $color-3;
+		height: 100vh;
+		& header {
+			color: $color-1;
+			padding-bottom: 30px;
+		}
+		&__input {
+			padding-bottom: 5px;
+			& input {
+				border: 1px solid $color-1;
+				padding: 5px;
+			}
+		}
+		& button {
+			border: 1px solid $color-1;
+			padding: 5px;
+			font-family: $font-secondary;
+			background-color: $color-4;
+			&:hover {
+				cursor: pointer;
+				box-shadow: 5px 5px $color-2;
+			}
+			&:active {
+				background-color: $color-3;
+				box-shadow: none;
+			}
+		}
+	}
+	&__chat {
+		display: flex;
+		height: 100vh;
+		&__header {
+			display: flex;
+			align-content: center;
+			justify-content: center;
+			background-color: $color-1;
+			color: $color-5;
+			width: 10%;
+			min-width: 50px;
+			& h1 {
+				display: flex;
+				justify-content: center;
+				font-size: 30px;
+				writing-mode: vertical-lr;
+				transform: rotate(-180deg);
+				text-orientation: revert;
+			}
+		}
+		&__info {
+			width: 30%;
+			background-color: $color-4;
+			color: $color-1;
+		}
+		&__room {
+			display: flex;
+			height: 10%;
+			align-items: center;
+			background-color: $color-3;
+			& p {
+				font-size: 20px;
+				font-family: $font-secondary;
+				font-style: italic;
+				padding-left: 10px;
+				color: $color-5;
+				width: 60%;
+			}
+			& button {
+				font-family: $font-secondary;
+				width: 120px;
+				height: 40px;
+				border: 1px solid $color-1;
+				background-color: $color-4;
+				&:hover {
+					cursor: pointer;
+					box-shadow: 5px 5px $color-2;
+				}
+				&:active {
+					background-color: $color-3;
+					box-shadow: none;
+				}
+			}
+		}
+		&__users {
+			padding: 10px 0 10px 10px;
+			max-height: 100%;
+			overflow-y: scroll;
+			& ul {
+				padding-top: 10px;
+				list-style: none;
+				& li {
+					padding-top: 10px;
+					font-family: $font-secondary;
+				}
+			}
+		}
+		&__wrapper {
+			width: 60%;
+			background-color: $color-5;
+			padding: 20px;
+		}
+		&__messages {
+			max-height: 80%;
+			overflow-y: scroll;
+		}
+		&__message {
+			max-width: 92%;
+			padding: 20px;
+			background-color: $color-3;
+			border-radius: 10px;
+			margin-bottom: 20px;
+			&:hover {
+				box-shadow: 5px 5px $color-2;
+			}
+			& p {
+				padding-bottom: 10px;
+			}
+			&__signature {
+				font-size: 12px;
+				font-family: $font-secondary;
+				font-style: italic;
+			}
+		}
+		&__controls {
+			& form {
+				padding-top: 10px;
+				display: flex;
+				justify-content: center;
+				& textarea {
+					margin-right: 20px;
+					padding: 5px;
+					width: 500px;
+					border: 1px solid $color-1;
+					resize: none;
+				}
+				& button {
+					border: 1px solid $color-1;
+					font-family: $font-secondary;
+					background-color: $color-4;
+					width: 80px;
+					&:hover {
+						cursor: pointer;
+						box-shadow: 5px 5px $color-2;
+					}
+					&:active {
+						background-color: $color-3;
+						box-shadow: none;
+					}
+				}
+			}
+		}
+	}
+}

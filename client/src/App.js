@@ -50,9 +50,6 @@ function App() {
 
 	return (
 		<div className="app">
-			<header className="app__header">
-				<h1>Fora Soft Evaluation Test App</h1>
-			</header>
 			{!state.joined ? (
 				<JoinBlock onLogin={onLogin} />
 			) : (

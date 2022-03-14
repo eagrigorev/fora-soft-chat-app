@@ -1,17 +1,27 @@
 import React from 'react';
 import socket from '../socket';
+import moment from 'moment';
 
 function Chat({ users, messages, userName, roomId, onAddMessage }) {
 	const [messageValue, setMessageValue] = React.useState('');
 	const messagesRef = React.useRef(null);
 
 	const onSendMessage = () => {
+		if (!messageValue) {
+			return alert('No empty messages allowed');
+		}
 		socket.emit('ROOM:NEW_MESSAGE', {
 			userName,
 			roomId,
 			text: messageValue,
+			time: moment().format('h:mm a'),
 		});
-		onAddMessage({ userName, text: messageValue });
+
+		onAddMessage({
+			userName,
+			text: messageValue,
+			time: moment().format('h:mm a'),
+		});
 		setMessageValue('');
 	};
 
@@ -19,40 +29,51 @@ function Chat({ users, messages, userName, roomId, onAddMessage }) {
 		messagesRef.current.scrollTo(0, 99999);
 	}, [messages]);
 
+	const copyToClipboard = () => {
+		navigator.clipboard.writeText(roomId);
+		alert('Copied!');
+	};
+
 	return (
 		<section className="app__chat">
+			<header className="app__chat__header">
+				<h1>Fora Soft Evaluation Test App</h1>
+			</header>
 			<div className="app__chat__info">
-				<p>
-					Room Name: <b>{roomId}</b>
-				</p>
-				<p>
-					<b>Online: {users.length}</b>
-				</p>
-				<ul>
-					{users.map((name, index) => (
-						<li key={name + index}>{name}</li>
-					))}
-				</ul>
+				<div className="app__chat__room">
+					<p>{roomId}</p>
+					<button className="app__chat__share" onClick={copyToClipboard}>
+						Share this room
+					</button>
+				</div>
+				<div className="app__chat__users">
+					<p>Online: {users.length}</p>
+					<ul>
+						{users.map((name, index) => (
+							<li key={name + index}>{name}</li>
+						))}
+					</ul>
+				</div>
 			</div>
 			<div className="app__chat__wrapper">
 				<div ref={messagesRef} className="app__chat__messages">
-					{messages.map((message) => (
-						<article className="app__chat__message">
+					{messages.map((message, index) => (
+						<article key={message + index} className="app__chat__message">
 							<p>{message.text}</p>
-							<span>{message.userName}</span>
+							<span className="app__chat__message__signature">
+								{message.userName} at {message.time}
+							</span>
 						</article>
 					))}
 				</div>
 				<div className="app__chat__controls">
 					<form>
-						<div className="app__chat__input">
-							<textarea
-								value={messageValue}
-								onChange={(e) => setMessageValue(e.target.value)}
-								className="app__chat__input"
-								rows="3"
-							></textarea>
-						</div>
+						<textarea
+							value={messageValue}
+							onChange={(e) => setMessageValue(e.target.value)}
+							className="app__chat__input"
+							rows="5"
+						></textarea>
 						<button
 							onClick={onSendMessage}
 							type="button"

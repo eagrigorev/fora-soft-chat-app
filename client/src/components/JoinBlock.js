@@ -21,6 +21,9 @@ function JoinBlock({ onLogin }) {
 
 	return (
 		<section className="app__login">
+			<header className="app__login__header">
+				<h1>Fora Soft Evaluation Test App</h1>
+			</header>
 			<div className="app__login__input">
 				<input
 					type="text"

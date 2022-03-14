@@ -3,6 +3,8 @@ const express = require('express');
 // Preventing possible cross-origin errors
 const cors = require('cors');
 const PORT = 8000;
+const Message = require('../utils/dataFormatters');
+const moment = require('moment');
 const app = express();
 const server = require('http').createServer(app);
 const io = require('socket.io')(server, {
@@ -56,11 +58,8 @@ io.on('connection', (socket) => {
 	});
 
 	// Listening to new messages
-	socket.on('ROOM:NEW_MESSAGE', ({ roomId, userName, text }) => {
-		const obj = {
-			userName,
-			text,
-		};
+	socket.on('ROOM:NEW_MESSAGE', ({ roomId, userName, text, time }) => {
+		const obj = new Message(userName, text, time);
 		// Updating our database with the new message and broadcasting it back to the chat
 		rooms.get(roomId).get('messages').push(obj);
 		socket.broadcast.to(roomId).emit('ROOM:NEW_MESSAGE', obj);
