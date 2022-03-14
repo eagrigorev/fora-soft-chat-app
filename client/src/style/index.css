@@ -1,1 +1,231 @@
-/* No CSS *//*# sourceMappingURL=index.css.map */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+}
+
+.app__login {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: #7d95de;
+  height: 100vh;
+}
+
+.app__login header {
+  color: #2e364d;
+  padding-bottom: 30px;
+}
+
+.app__login__input {
+  padding-bottom: 5px;
+}
+
+.app__login__input input {
+  border: 1px solid #2e364d;
+  padding: 5px;
+}
+
+.app__login button {
+  border: 1px solid #2e364d;
+  padding: 5px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  background-color: #ddc8f9;
+}
+
+.app__login button:hover {
+  cursor: pointer;
+  -webkit-box-shadow: 5px 5px #425d87;
+          box-shadow: 5px 5px #425d87;
+}
+
+.app__login button:active {
+  background-color: #7d95de;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.app__chat {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100vh;
+}
+
+.app__chat__header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: #2e364d;
+  color: #fbfef9;
+  width: 10%;
+  min-width: 50px;
+}
+
+.app__chat__header h1 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-size: 30px;
+  -webkit-writing-mode: vertical-lr;
+      -ms-writing-mode: tb-lr;
+          writing-mode: vertical-lr;
+  -webkit-transform: rotate(-180deg);
+          transform: rotate(-180deg);
+  text-orientation: revert;
+}
+
+.app__chat__info {
+  width: 30%;
+  background-color: #ddc8f9;
+  color: #2e364d;
+}
+
+.app__chat__room {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 10%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #7d95de;
+}
+
+.app__chat__room p {
+  font-size: 20px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-style: italic;
+  padding-left: 10px;
+  color: #fbfef9;
+  width: 60%;
+}
+
+.app__chat__room button {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  width: 120px;
+  height: 40px;
+  border: 1px solid #2e364d;
+  background-color: #ddc8f9;
+}
+
+.app__chat__room button:hover {
+  cursor: pointer;
+  -webkit-box-shadow: 5px 5px #425d87;
+          box-shadow: 5px 5px #425d87;
+}
+
+.app__chat__room button:active {
+  background-color: #7d95de;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.app__chat__users {
+  padding: 10px 0 10px 10px;
+  max-height: 100%;
+  overflow-y: scroll;
+}
+
+.app__chat__users ul {
+  padding-top: 10px;
+  list-style: none;
+}
+
+.app__chat__users ul li {
+  padding-top: 10px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.app__chat__wrapper {
+  width: 60%;
+  background-color: #fbfef9;
+  padding: 20px;
+}
+
+.app__chat__messages {
+  max-height: 80%;
+  overflow-y: scroll;
+}
+
+.app__chat__message {
+  max-width: 92%;
+  padding: 20px;
+  background-color: #7d95de;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.app__chat__message:hover {
+  -webkit-box-shadow: 5px 5px #425d87;
+          box-shadow: 5px 5px #425d87;
+}
+
+.app__chat__message p {
+  padding-bottom: 10px;
+}
+
+.app__chat__message__signature {
+  font-size: 12px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-style: italic;
+}
+
+.app__chat__controls form {
+  padding-top: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.app__chat__controls form textarea {
+  margin-right: 20px;
+  padding: 5px;
+  width: 500px;
+  border: 1px solid #2e364d;
+  resize: none;
+}
+
+.app__chat__controls form button {
+  border: 1px solid #2e364d;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  background-color: #ddc8f9;
+  width: 80px;
+}
+
+.app__chat__controls form button:hover {
+  cursor: pointer;
+  -webkit-box-shadow: 5px 5px #425d87;
+          box-shadow: 5px 5px #425d87;
+}
+
+.app__chat__controls form button:active {
+  background-color: #7d95de;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+/*# sourceMappingURL=index.css.map */
