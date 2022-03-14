@@ -1,11 +1,12 @@
 import React from 'react';
 import axios from 'axios';
 import socket from './socket';
-import reducer from './reducer';
+import { reducer } from './reducer';
 import JoinBlock from './components/JoinBlock';
 import Chat from './components/Chat';
 
 function App() {
+	// Implementing 'store' functionality without 'redux'
 	const [state, dispatch] = React.useReducer(reducer, {
 		joined: false,
 		roomId: null,
@@ -45,8 +46,6 @@ function App() {
 		socket.on('ROOM:SET_USERS', setUsers);
 		socket.on('ROOM:NEW_MESSAGE', addMessage);
 	}, []);
-
-	window.socket = socket;
 
 	return (
 		<div className="app">

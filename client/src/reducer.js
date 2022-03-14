@@ -1,4 +1,4 @@
-export default (state, action) => {
+export const reducer = (state, action) => {
 	switch (action.type) {
 		case 'JOINED':
 			return {

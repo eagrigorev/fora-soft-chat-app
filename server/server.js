@@ -4,7 +4,6 @@ const express = require('express');
 const cors = require('cors');
 const PORT = 8000;
 const Message = require('../utils/dataFormatters');
-const moment = require('moment');
 const app = express();
 const server = require('http').createServer(app);
 const io = require('socket.io')(server, {

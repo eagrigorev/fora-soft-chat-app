@@ -6,6 +6,7 @@ function JoinBlock({ onLogin }) {
 	const [userName, setUserName] = React.useState('');
 	const [isLoading, setLoading] = React.useState(false);
 
+	// Implementing 'no empty form fields' feature
 	const onEnter = async () => {
 		if (!roomId || !userName) {
 			return alert('Fill in both fields!');
@@ -14,6 +15,7 @@ function JoinBlock({ onLogin }) {
 			roomId,
 			userName,
 		};
+		// Adding 'loading...' functionality while the request is sending to the server
 		setLoading(true);
 		await axios.post('/rooms', obj);
 		onLogin(obj);

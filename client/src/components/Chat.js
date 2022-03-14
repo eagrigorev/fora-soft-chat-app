@@ -6,10 +6,12 @@ function Chat({ users, messages, userName, roomId, onAddMessage }) {
 	const [messageValue, setMessageValue] = React.useState('');
 	const messagesRef = React.useRef(null);
 
+	// Disabling empty message submission
 	const onSendMessage = () => {
 		if (!messageValue) {
 			return alert('No empty messages allowed');
 		}
+		// Notifying the server and adding a timestamp to the message via 'moment'-library
 		socket.emit('ROOM:NEW_MESSAGE', {
 			userName,
 			roomId,
@@ -25,10 +27,12 @@ function Chat({ users, messages, userName, roomId, onAddMessage }) {
 		setMessageValue('');
 	};
 
+	// Handling autoscrolling to the bottom of the message list
 	React.useEffect(() => {
-		messagesRef.current.scrollTo(0, 99999);
+		messagesRef.current.scrollTo(0, 999999);
 	}, [messages]);
 
+	// Adding room name share functionality
 	const copyToClipboard = () => {
 		navigator.clipboard.writeText(roomId);
 		alert('Copied!');
