@@ -2,6 +2,7 @@
 
 ### Running the App
 Server-side: run `npm install` and `npm run start:backend:dev` from the `/server` folder.
+
 Client-side: run `npm install` and `npm run start:frontend:dev` from the `/client` folder.
 
 ### How It Works
